@@ -35,3 +35,18 @@ calculator.get("/stateless-add", (c) => {
 });
 
 // crash-route
+calculator.get("/crash", (c) => {
+  console.log("Programm crashed!");
+  process.exit();
+});
+
+// stress-route
+calculator.get("/stress", (c) => {
+  function stressCpu() {
+    while (true) {
+      Math.sqrt(Math.random());
+    }
+  }
+  stressCpu();
+  return c.json({ message: "Stress Test started" });
+});
